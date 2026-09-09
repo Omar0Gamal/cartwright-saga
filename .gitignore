@@ -1,0 +1,11 @@
+bin/
+obj/
+.env
+*.tfstate*
+.terraform/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+services/orchestrator/orchestrator
+*:Zone.Identifier
