@@ -1,5 +1,7 @@
 # Cartwright
 
+[![CI](https://github.com/Omar0Gamal/cartwright/actions/workflows/deploy-validate.yml/badge.svg)](https://github.com/Omar0Gamal/cartwright/actions/workflows/deploy-validate.yml)
+
 > **Note:** Cartwright is a personal portfolio project built from a blank repository. It is unrelated to any employer or client work and shares no code, schemas, protobufs, or configuration with any of it.
 
 Cartwright is a distributed saga-based order checkout system that stays consistent when its services crash mid-request. An order passes through *authorize payment → reserve stock → capture payment → confirm order*. If a step fails, the orchestrator runs compensating actions in reverse so the system always ends in a consistent state: never double-charged, never a paid order that was silently lost.
@@ -13,15 +15,7 @@ It demonstrates how to design and test for failure in a distributed workflow usi
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    client([Client]) -- "HTTP/JSON" --> orch["Orchestrator<br/>(Go)"]
-    orch -- "gRPC" --> billing["Billing<br/>(C# / ASP.NET Core)"]
-    orch --> pgo[("Postgres<br/>db: orchestrator")]
-    billing --> pgb[("Postgres<br/>db: billing")]
-    orch -- "outbox publisher" --> nats{{"NATS JetStream"}}
-    nats -- "durable pull consumer" --> notifier["Notifier<br/>(Python)"]
-```
+![Architecture Diagram](docs/architecture.svg)
 
 ## The Headline Test (Chaos Demo)
 

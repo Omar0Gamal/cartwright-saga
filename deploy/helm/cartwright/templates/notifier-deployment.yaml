@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-notifier
+spec:
+  replicas: {{ .Values.notifier.replicas }}
+  selector:
+    matchLabels:
+      app: notifier
+  template:
+    metadata:
+      labels:
+        app: notifier
+    spec:
+      containers:
+        - name: notifier
+          image: {{ .Values.notifier.image }}
+          env:
+            - name: NATS_URL
+              value: "nats://{{ .Release.Name }}-nats:4222"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
+          # Notifier has no HTTP server by default for health, but we can add dummy if needed, or omit.

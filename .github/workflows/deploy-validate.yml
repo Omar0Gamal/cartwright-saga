@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  proto:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: bufbuild/buf-setup-action@v1.50.0
+      with:
+        github_token: ${{ github.token }}
+    - run: buf lint
+    - uses: bufbuild/buf-breaking-action@v1
+      with:
+        against: 'https://github.com/Omar0Gamal/cartwright-saga.git#branch=main'
+    - name: Check generated code is up to date
+      run: |
+        buf generate
+        git diff --exit-code services/orchestrator/gen/ services/notifier/src/notifier/gen/
+
+  orchestrator:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-go@v5
+      with:
+        go-version: '1.26'
+        cache-dependency-path: services/orchestrator/go.sum
+    - run: cd services/orchestrator && go vet ./...
+    - run: cd services/orchestrator && go test -v -race ./...
+
+  billing:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    - run: cd services/billing && dotnet format --verify-no-changes
+    - run: cd services/billing && dotnet test
+
+  notifier:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - run: pip install uv
+    - run: cd services/notifier && uv sync
+    - run: cd services/notifier && uv run ruff check .
+    - run: cd services/notifier && uv run pytest -v
+
+  deploy-validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: hashicorp/setup-terraform@v3
+    - name: Helm lint
+      run: helm lint deploy/helm/cartwright/
+    - name: Terraform validate
+      run: |
+        cd deploy/terraform/gcp
+        terraform init -backend=false
+        terraform fmt -check
+        terraform validate
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [orchestrator, billing, notifier]
+    steps:
+    - uses: actions/checkout@v4
+    - run: make up
+    - run: make e2e

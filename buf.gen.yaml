@@ -1,0 +1,12 @@
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: services/orchestrator/gen
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go
+    out: services/orchestrator/gen
+    opt: paths=source_relative
+  - remote: buf.build/protocolbuffers/python
+    out: services/notifier/src/notifier/gen
+  - remote: buf.build/protocolbuffers/pyi
+    out: services/notifier/src/notifier/gen

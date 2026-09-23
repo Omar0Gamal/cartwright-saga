@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS outbox;
+DROP TABLE IF EXISTS reservations;
+DROP TABLE IF EXISTS inventory;
+DROP TABLE IF EXISTS saga_steps;
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS orders;

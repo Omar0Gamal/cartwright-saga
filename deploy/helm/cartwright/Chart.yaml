@@ -1,0 +1,5 @@
+apiVersion: v2
+name: cartwright
+description: A Helm chart for Cartwright
+version: 0.1.0
+appVersion: "1.0"

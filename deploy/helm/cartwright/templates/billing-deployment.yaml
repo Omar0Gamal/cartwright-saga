@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-billing
+spec:
+  replicas: {{ .Values.billing.replicas }}
+  selector:
+    matchLabels:
+      app: billing
+  template:
+    metadata:
+      labels:
+        app: billing
+    spec:
+      containers:
+        - name: billing
+          image: {{ .Values.billing.image }}
+          ports:
+            - containerPort: 50051
+          env:
+            - name: ASPNETCORE_HTTP_PORTS
+              value: "50051"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.postgres.existingSecret }}
+                  key: {{ .Values.postgres.secretKey }}
+            - name: DATABASE_URL
+              value: "Host={{ .Release.Name }}-postgres;Port=5432;Database=billing;Username=postgres;Password=$(POSTGRES_PASSWORD)"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 50051
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 50051
+            initialDelaySeconds: 5
+            periodSeconds: 10

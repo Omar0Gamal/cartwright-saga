@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 550">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .box { fill: #f8f9fa; stroke: #ced4da; stroke-width: 2; rx: 8; }
+      .db { fill: #e3f2fd; stroke: #90caf9; stroke-width: 2; rx: 8; }
+      .broker { fill: #fff3e0; stroke: #ffcc80; stroke-width: 2; rx: 8; }
+      .client { fill: #e8f5e9; stroke: #a5d6a7; stroke-width: 2; rx: 20; }
+      .text-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 600; fill: #212529; text-anchor: middle; }
+      .text-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #6c757d; text-anchor: middle; }
+      .line { stroke: #adb5bd; stroke-width: 2; fill: none; }
+      .line-dashed { stroke: #adb5bd; stroke-width: 2; fill: none; stroke-dasharray: 6; }
+      .arrow { fill: #adb5bd; }
+      .label-bg { fill: #ffffff; opacity: 0.9; }
+      .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12px; fill: #495057; text-anchor: middle; font-weight: 500; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" class="arrow" />
+    </marker>
+  </defs>
+
+  <rect width="950" height="550" class="bg" />
+
+  <!-- Client -->
+  <rect x="50" y="235" width="120" height="60" class="client" />
+  <text x="110" y="270" class="text-title">Client</text>
+
+  <!-- Orchestrator -->
+  <rect x="300" y="225" width="160" height="80" class="box" />
+  <text x="380" y="260" class="text-title">Orchestrator</text>
+  <text x="380" y="280" class="text-sub">(Go)</text>
+
+  <!-- Orchestrator DB -->
+  <rect x="300" y="370" width="160" height="70" class="db" />
+  <text x="380" y="405" class="text-title">PostgreSQL</text>
+  <text x="380" y="425" class="text-sub">orchestrator db</text>
+
+  <!-- Billing -->
+  <rect x="650" y="100" width="160" height="80" class="box" />
+  <text x="730" y="135" class="text-title">Billing</text>
+  <text x="730" y="155" class="text-sub">(C# / ASP.NET)</text>
+
+  <!-- Billing DB -->
+  <rect x="650" y="230" width="160" height="70" class="db" />
+  <text x="730" y="265" class="text-title">PostgreSQL</text>
+  <text x="730" y="285" class="text-sub">billing db</text>
+
+  <!-- NATS -->
+  <rect x="650" y="370" width="160" height="70" class="broker" />
+  <text x="730" y="405" class="text-title">NATS JetStream</text>
+  <text x="730" y="425" class="text-sub">message broker</text>
+
+  <!-- Notifier -->
+  <rect x="650" y="480" width="160" height="80" class="box" />
+  <text x="730" y="515" class="text-title">Notifier</text>
+  <text x="730" y="535" class="text-sub">(Python)</text>
+
+  <!-- Edges -->
+  <!-- Client to Orchestrator -->
+  <path d="M 170 265 L 290 265" class="line" marker-end="url(#arrowhead)" />
+  <rect x="180" y="250" width="100" height="20" class="label-bg" />
+  <text x="230" y="263" class="label">HTTP POST /v1/orders</text>
+
+  <!-- Orchestrator to Billing -->
+  <path d="M 460 250 L 530 250 L 530 140 L 640 140" class="line" marker-end="url(#arrowhead)" />
+  <rect x="490" y="125" width="80" height="20" class="label-bg" />
+  <text x="530" y="138" class="label">gRPC Authorize</text>
+
+  <!-- Orchestrator to DB -->
+  <path d="M 380 305 L 380 360" class="line" marker-end="url(#arrowhead)" />
+  <rect x="340" y="325" width="80" height="20" class="label-bg" />
+  <text x="380" y="338" class="label">State & Outbox</text>
+
+  <!-- Billing to DB -->
+  <path d="M 730 180 L 730 220" class="line" marker-end="url(#arrowhead)" />
+
+  <!-- Orchestrator to NATS (Outbox Publisher) -->
+  <path d="M 460 275 L 530 275 L 530 405 L 640 405" class="line-dashed" marker-end="url(#arrowhead)" />
+  <rect x="490" y="390" width="100" height="20" class="label-bg" />
+  <text x="540" y="403" class="label">Outbox Publisher</text>
+
+  <!-- NATS to Notifier -->
+  <path d="M 730 440 L 730 470" class="line" marker-end="url(#arrowhead)" />
+  <rect x="670" y="445" width="120" height="20" class="label-bg" />
+  <text x="730" y="458" class="label">Durable Consumer</text>
+
+</svg>

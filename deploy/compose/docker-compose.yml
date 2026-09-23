@@ -1,0 +1,73 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d:ro
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      retries: 10
+
+  nats:
+    image: nats:2.10
+    command: ["-js", "-m", "8222"]
+    ports: ["4222:4222", "8222:8222"]
+
+  orchestrator:
+    container_name: cartwright-orchestrator
+    build:
+      context: ../../services/orchestrator
+      dockerfile: Dockerfile
+    ports: ["8080:8080"]
+    environment:
+      - HTTP_ADDR=:8080
+      - BILLING_ADDR=dns:///billing:50051
+      - NATS_URL=nats://nats:4222
+      - DATABASE_URL=postgres://postgres:${POSTGRES_PASSWORD:-postgres}@postgres:5432/orchestrator?sslmode=disable
+      - CARTWRIGHT_FAULTS=${CARTWRIGHT_FAULTS:-}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/healthz"]
+      interval: 5s
+      retries: 5
+
+  billing:
+    container_name: cartwright-billing
+    build:
+      context: ../..
+      dockerfile: services/billing/Dockerfile
+    ports: ["50051:50051"]
+    environment:
+      - DATABASE_URL=Host=postgres;Port=5432;Database=billing;Username=postgres;Password=${POSTGRES_PASSWORD:-postgres}
+      - ASPNETCORE_HTTP_PORTS=50051
+      - CARTWRIGHT_FAULTS=${CARTWRIGHT_FAULTS:-}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "--http2-prior-knowledge", "http://localhost:50051/healthz"]
+      interval: 5s
+      retries: 5
+      start_period: 10s
+
+  notifier:
+    container_name: cartwright-notifier
+    build:
+      context: ../../services/notifier
+      dockerfile: Dockerfile
+    environment:
+      - NATS_URL=nats://nats:4222
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "4317:4317"

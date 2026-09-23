@@ -1,0 +1,1 @@
+ALTER TABLE outbox ADD COLUMN claimed_at TIMESTAMPTZ;

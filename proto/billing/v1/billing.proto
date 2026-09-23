@@ -1,0 +1,32 @@
+syntax = "proto3";
+package billing.v1;
+option go_package = "github.com/Omar0Gamal/cartwright/services/orchestrator/gen/billing/v1";
+
+service Billing {
+  rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);
+  rpc Capture   (CaptureRequest)   returns (CaptureResponse);
+  rpc Void      (VoidRequest)      returns (VoidResponse);
+}
+
+enum PaymentStatus {
+  PAYMENT_STATUS_UNSPECIFIED = 0;
+  PAYMENT_STATUS_AUTHORIZED  = 1;
+  PAYMENT_STATUS_CAPTURED    = 2;
+  PAYMENT_STATUS_VOIDED      = 3;
+  PAYMENT_STATUS_DECLINED    = 4;
+}
+
+message AuthorizeRequest {
+  string idempotency_key = 1;
+  string order_id        = 2;
+  int64  amount_cents    = 3;
+  string currency        = 4;
+  string payment_token   = 5;
+}
+message AuthorizeResponse { string payment_id = 1; PaymentStatus status = 2; string decline_reason = 3; }
+
+message CaptureRequest  { string idempotency_key = 1; string order_id = 2; }
+message CaptureResponse { string payment_id = 1; PaymentStatus status = 2; }
+
+message VoidRequest  { string idempotency_key = 1; string order_id = 2; }  // by order_id: safe when the authorize outcome is unknown
+message VoidResponse { PaymentStatus status = 1; }

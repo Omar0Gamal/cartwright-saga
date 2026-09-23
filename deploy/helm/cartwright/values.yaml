@@ -1,0 +1,15 @@
+orchestrator:
+  image: ghcr.io/omar0gamal/cartwright/orchestrator:latest
+  replicas: 1
+billing:
+  image: ghcr.io/omar0gamal/cartwright/billing:latest
+  replicas: 1
+notifier:
+  image: ghcr.io/omar0gamal/cartwright/notifier:latest
+  replicas: 1
+postgres:
+  image: postgres:16
+  existingSecret: cartwright-postgres
+  secretKey: password
+nats:
+  image: nats:2.10

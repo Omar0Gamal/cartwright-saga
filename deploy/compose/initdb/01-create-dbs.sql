@@ -1,0 +1,2 @@
+CREATE DATABASE orchestrator;
+CREATE DATABASE billing;
