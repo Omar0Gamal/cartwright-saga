@@ -10,7 +10,7 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/saga"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/saga"
 )
 
 var ErrDuplicateKey = errors.New("duplicate idempotency key")

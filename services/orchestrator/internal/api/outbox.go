@@ -8,7 +8,7 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
 
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/store"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/store"
 )
 
 func StartOutboxPublisher(ctx context.Context, st store.Store, js jetstream.JetStream) {

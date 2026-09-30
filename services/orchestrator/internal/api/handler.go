@@ -19,10 +19,10 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	eventspb "github.com/Omar0Gamal/cartwright/services/orchestrator/gen/events/v1"
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/billingclient"
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/saga"
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/store"
+	eventspb "github.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/billingclient"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/saga"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/store"
 )
 
 type CreateOrderRequest struct {

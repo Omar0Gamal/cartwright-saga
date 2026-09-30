@@ -17,9 +17,9 @@ import (
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
 
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/api"
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/billingclient"
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/store"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/api"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/billingclient"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/store"
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )
 

@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 
-	billingpb "github.com/Omar0Gamal/cartwright/services/orchestrator/gen/billing/v1"
+	billingpb "github.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/billing/v1"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 )
 

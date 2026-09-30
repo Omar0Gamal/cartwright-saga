@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Omar0Gamal/cartwright/services/orchestrator/internal/saga"
+	"github.com/Omar0Gamal/cartwright-saga/services/orchestrator/internal/saga"
 )
 
 type MemoryStore struct {

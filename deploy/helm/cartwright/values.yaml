@@ -1,15 +1,25 @@
+gcpProjectId: "your-gcp-project-id"
 orchestrator:
-  image: ghcr.io/omar0gamal/cartwright/orchestrator:latest
+  image: ghcr.io/omar0gamal/cartwright-saga/orchestrator:latest
   replicas: 1
 billing:
-  image: ghcr.io/omar0gamal/cartwright/billing:latest
+  image: ghcr.io/omar0gamal/cartwright-saga/billing:latest
   replicas: 1
 notifier:
-  image: ghcr.io/omar0gamal/cartwright/notifier:latest
+  image: ghcr.io/omar0gamal/cartwright-saga/notifier:latest
   replicas: 1
-postgres:
-  image: postgres:16
-  existingSecret: cartwright-postgres
-  secretKey: password
+postgresql:
+  enabled: true
+  auth:
+    existingSecret: "cartwright-postgres-secret"
+    secretKeys:
+      adminPasswordKey: "postgres-password"
+    database: "orchestrator"
+  primary:
+    initdb:
+      scriptsConfigMap: "cartwright-postgres-init"
+
 nats:
-  image: nats:2.10
+  enabled: true
+  nats:
+    image: nats:2.10

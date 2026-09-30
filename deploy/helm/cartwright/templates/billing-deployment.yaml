@@ -23,10 +23,10 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postgres.secretKey }}
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
             - name: DATABASE_URL
-              value: "Host={{ .Release.Name }}-postgres;Port=5432;Database=billing;Username=postgres;Password=$(POSTGRES_PASSWORD)"
+              value: "Host={{ .Release.Name }}-postgresql;Port=5432;Database=billing;Username=postgres;Password=$(POSTGRES_PASSWORD)"
           resources:
             requests:
               cpu: 100m

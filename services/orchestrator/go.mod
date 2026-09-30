@@ -1,4 +1,4 @@
-module github.com/Omar0Gamal/cartwright/services/orchestrator
+module github.com/Omar0Gamal/cartwright-saga/services/orchestrator
 
 go 1.26.0
 

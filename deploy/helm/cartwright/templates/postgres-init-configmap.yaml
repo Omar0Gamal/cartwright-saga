@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cartwright-postgres-init
+data:
+  01-create-dbs.sql: |
+    CREATE DATABASE orchestrator;
+    CREATE DATABASE billing;

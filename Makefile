@@ -25,3 +25,7 @@ e2e:
 	cd tests/e2e && go test -v -count=1 ./...
 
 demo-failure: e2e
+	
+load-test:
+	# Run k6 load tests using a docker container (requires Docker)
+	docker run --rm -i --network host -v $$(pwd)/tests/load:/tests grafana/k6 run /tests/orchestrator-stress.js

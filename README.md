@@ -1,6 +1,6 @@
 # Cartwright
 
-[![CI](https://github.com/Omar0Gamal/cartwright/actions/workflows/deploy-validate.yml/badge.svg)](https://github.com/Omar0Gamal/cartwright/actions/workflows/deploy-validate.yml)
+[![CI](https://github.com/Omar0Gamal/cartwright-saga/actions/workflows/deploy-validate.yml/badge.svg)](https://github.com/Omar0Gamal/cartwright-saga/actions/workflows/deploy-validate.yml)
 
 > **Note:** Cartwright is a personal portfolio project built from a blank repository. It is unrelated to any employer or client work and shares no code, schemas, protobufs, or configuration with any of it.
 

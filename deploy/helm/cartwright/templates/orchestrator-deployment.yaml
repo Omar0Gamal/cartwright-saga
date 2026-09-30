@@ -27,10 +27,10 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.postgres.existingSecret }}
-                  key: {{ .Values.postgres.secretKey }}
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
             - name: DATABASE_URL
-              value: "postgres://postgres:$(POSTGRES_PASSWORD)@{{ .Release.Name }}-postgres:5432/orchestrator?sslmode=disable"
+              value: "postgres://postgres:$(POSTGRES_PASSWORD)@{{ .Release.Name }}-postgresql:5432/orchestrator?sslmode=disable"
           resources:
             requests:
               cpu: 100m
