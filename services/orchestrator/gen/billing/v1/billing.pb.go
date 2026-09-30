@@ -450,7 +450,7 @@ const file_billing_v1_billing_proto_rawDesc = "" +
 	"\aBilling\x12H\n" +
 	"\tAuthorize\x12\x1c.billing.v1.AuthorizeRequest\x1a\x1d.billing.v1.AuthorizeResponse\x12B\n" +
 	"\aCapture\x12\x1a.billing.v1.CaptureRequest\x1a\x1b.billing.v1.CaptureResponse\x129\n" +
-	"\x04Void\x12\x17.billing.v1.VoidRequest\x1a\x18.billing.v1.VoidResponseBGZEgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/billing/v1b\x06proto3"
+	"\x04Void\x12\x17.billing.v1.VoidRequest\x1a\x18.billing.v1.VoidResponseBLZJgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/billing/v1b\x06proto3"
 
 var (
 	file_billing_v1_billing_proto_rawDescOnce sync.Once

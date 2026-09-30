@@ -85,8 +85,6 @@ resource "google_compute_instance" "k3s_node" {
   metadata_startup_script = <<-EOF
     #!/bin/bash
     curl -sfL https://get.k3s.io | sh -
-    
-    # Wait for node to be ready and kubeconfig to be generated
     sleep 15
     cp /etc/rancher/k3s/k3s.yaml /home/ubuntu/kubeconfig
     chmod 644 /home/ubuntu/kubeconfig
@@ -111,21 +109,18 @@ resource "random_password" "postgres_password" {
 }
 
 resource "google_project_service" "secretmanager" {
-  service = "secretmanager.googleapis.com"
+  service            = "secretmanager.googleapis.com"
   disable_on_destroy = false
 }
 
 resource "google_secret_manager_secret" "postgres_password" {
   secret_id = "cartwright-postgres-password"
-  
+
   replication {
     auto {}
   }
 
-  rotation {
-    rotation_period = "2592000s" # 30 days
-    next_rotation_time = "2026-11-01T00:00:00Z"
-  }
+  # rotation requires a paired Pub/Sub topic + Cloud Function; omitted here, wired in on real deploy
 
   depends_on = [google_project_service.secretmanager]
 }

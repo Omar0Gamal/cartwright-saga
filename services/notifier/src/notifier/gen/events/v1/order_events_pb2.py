@@ -25,14 +25,14 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1c\x65vents/v1/order_events.proto\x12\tevents.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x02\n\x0eOrderConfirmed\x12\x19\n\x08\x65vent_id\x18\x01 \x01(\tR\x07\x65ventId\x12\x19\n\x08order_id\x18\x02 \x01(\tR\x07orderId\x12\x1f\n\x0b\x63ustomer_id\x18\x03 \x01(\tR\ncustomerId\x12\x1f\n\x0btotal_cents\x18\x04 \x01(\x03R\ntotalCents\x12\x1a\n\x08\x63urrency\x18\x05 \x01(\tR\x08\x63urrency\x12;\n\x0boccurred_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\noccurredAt\x12%\n\x0e\x63orrelation_id\x18\x07 \x01(\tR\rcorrelationId\"\xe3\x01\n\x0eOrderCancelled\x12\x19\n\x08\x65vent_id\x18\x01 \x01(\tR\x07\x65ventId\x12\x19\n\x08order_id\x18\x02 \x01(\tR\x07orderId\x12\x1f\n\x0b\x63ustomer_id\x18\x03 \x01(\tR\ncustomerId\x12\x16\n\x06reason\x18\x04 \x01(\tR\x06reason\x12;\n\x0boccurred_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\noccurredAt\x12%\n\x0e\x63orrelation_id\x18\x06 \x01(\tR\rcorrelationIdBFZDgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1c\x65vents/v1/order_events.proto\x12\tevents.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\x88\x02\n\x0eOrderConfirmed\x12\x19\n\x08\x65vent_id\x18\x01 \x01(\tR\x07\x65ventId\x12\x19\n\x08order_id\x18\x02 \x01(\tR\x07orderId\x12\x1f\n\x0b\x63ustomer_id\x18\x03 \x01(\tR\ncustomerId\x12\x1f\n\x0btotal_cents\x18\x04 \x01(\x03R\ntotalCents\x12\x1a\n\x08\x63urrency\x18\x05 \x01(\tR\x08\x63urrency\x12;\n\x0boccurred_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\noccurredAt\x12%\n\x0e\x63orrelation_id\x18\x07 \x01(\tR\rcorrelationId\"\xe3\x01\n\x0eOrderCancelled\x12\x19\n\x08\x65vent_id\x18\x01 \x01(\tR\x07\x65ventId\x12\x19\n\x08order_id\x18\x02 \x01(\tR\x07orderId\x12\x1f\n\x0b\x63ustomer_id\x18\x03 \x01(\tR\ncustomerId\x12\x16\n\x06reason\x18\x04 \x01(\tR\x06reason\x12;\n\x0boccurred_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.TimestampR\noccurredAt\x12%\n\x0e\x63orrelation_id\x18\x06 \x01(\tR\rcorrelationIdBKZIgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'events.v1.order_events_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'ZDgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1'
+  _globals['DESCRIPTOR']._serialized_options = b'ZIgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1'
   _globals['_ORDERCONFIRMED']._serialized_start=77
   _globals['_ORDERCONFIRMED']._serialized_end=341
   _globals['_ORDERCANCELLED']._serialized_start=344

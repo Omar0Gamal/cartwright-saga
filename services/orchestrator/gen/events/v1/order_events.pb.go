@@ -222,7 +222,7 @@ const file_events_v1_order_events_proto_rawDesc = "" +
 	"\x06reason\x18\x04 \x01(\tR\x06reason\x12;\n" +
 	"\voccurred_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"occurredAt\x12%\n" +
-	"\x0ecorrelation_id\x18\x06 \x01(\tR\rcorrelationIdBFZDgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1b\x06proto3"
+	"\x0ecorrelation_id\x18\x06 \x01(\tR\rcorrelationIdBKZIgithub.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1b\x06proto3"
 
 var (
 	file_events_v1_order_events_proto_rawDescOnce sync.Once

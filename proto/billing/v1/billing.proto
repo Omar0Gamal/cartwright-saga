@@ -1,6 +1,6 @@
 syntax = "proto3";
 package billing.v1;
-option go_package = "github.com/Omar0Gamal/cartwright/services/orchestrator/gen/billing/v1";
+option go_package = "github.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/billing/v1";
 
 service Billing {
   rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse);

@@ -1,6 +1,6 @@
 syntax = "proto3";
 package events.v1;
-option go_package = "github.com/Omar0Gamal/cartwright/services/orchestrator/gen/events/v1";
+option go_package = "github.com/Omar0Gamal/cartwright-saga/services/orchestrator/gen/events/v1";
 
 import "google/protobuf/timestamp.proto";
 
